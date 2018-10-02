@@ -7,6 +7,8 @@
 3. Clone (or make sure you're up to date with `git pull`) the repository, then create a new branch for your change with `git checkout -b <your branch name>`.
 4. Make your changes.
 5. Submit a [Pull Request](https://services.github.com/on-demand/github-cli/open-pull-request-github); be descriptive, and indicate which issue(s) are related to your changes.
-6. Your PR will must be reviewed and approved by a maintainer and at least one other person prior to being merged. If changes are requested, push additional commits to your branch accordingly.
+6. Your PR must be reviewed and approved by a maintainer and at least one other person prior to being merged. If changes are requested, push additional commits to your branch accordingly.
 7. When your PR has been approved it will be merged.  Thanks for your contribution!
+
+If you aren't sure what to do at any point, ask! There are no stupid questions.
 
