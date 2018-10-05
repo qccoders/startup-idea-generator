@@ -1,6 +1,16 @@
 # Startup Idea Generator
 
-# How to Contribute
+Click a button, receive a randomized startup idea!  With enough clicks and a vivid imagination, you could be the CEO of the next billion dollar startup!
+
+## About this App
+
+This app is being collaboratively built by the members of [QC Coders](http://qccoders.org) as part of the [Hacktoberfest 2018](https://hacktoberfest.digitalocean.com/) event.  Our goal is to make something fun while providing our members with experience collaborating on an Open Source project and using Git and GitHub.
+
+We aren't taking this project or ourselves too seriously and you shouldn't either.  We'd like everyone that is interested to participate; if you aren't confident in your skills then this is a great opportunity to learn.
+
+## How to Contribute
+
+Be sure that you've registered on the [Hacktoberfest 2018](https://hacktoberfest.digitalocean.com/) site!
 
 1. Contact us (via Slack, email to info@qccoders.org, or GitHub issue) to be added as a collaborator.
 2. Find an open, unassigned issue that you'd like to work on and assign yourself.  If the work you'd like to do doesn't have an issue, create one and wait for feedback from a maintainer before beginning work.
