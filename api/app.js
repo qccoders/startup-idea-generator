@@ -9,7 +9,7 @@ app.get("/", (req, res) => res.send("Hello World!"));
 
 app.get("/idea", (req, res) => res.send("startup idea goes here"));
 
-app.get("/startups", (req, res) => res.status(200).json(startupsList));
+app.get("/startups", (req, res) => res.status(200).json(startupList));
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
