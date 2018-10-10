@@ -7,6 +7,8 @@ const port = 3000;
 const getStartupList = () => startupList.toString();
 const getNounsList = () => nounsList.toString();
 
+const getRandomIndex = array => array[Math.floor(Math.random() * array.length)];
+
 app.get("/", (req, res) => res.send("Hello World!"));
 
 app.get("/idea", (req, res) => res.send("startup idea goes here"));
