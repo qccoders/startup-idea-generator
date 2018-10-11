@@ -1,4 +1,4 @@
-module.export = [
+module.exports = [
   "government",
   "village",
   "penalty",
