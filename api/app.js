@@ -15,4 +15,6 @@ app.get("/idea", (req, res) => res.send("startup idea goes here"));
 
 app.get("/startups", (req, res) => res.status(200).json(startupList));
 
+app.get("/nouns", (req, res) => res.status(200).json(nounsList));
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
