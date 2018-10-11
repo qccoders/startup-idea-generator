@@ -8,6 +8,10 @@ const getStartupList = () => startupList.toString();
 const getNounsList = () => nounsList.toString();
 
 const getRandomIndex = array => array[Math.floor(Math.random() * array.length)];
+const getIdeaPair = () => ({
+  startup: getRandomIndex(startupList),
+  noun: getRandomIndex(nounsList)
+});
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
