@@ -2,25 +2,17 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "nodemon src/index.js src/index.js",
     "test": "echo \"Error: no test specified\"",
-    "clean-modules": "rm -rf node_modules/aws-sdk && modclean -rvn default:safe,default:caution",
-    "zip": "python tools/zip.py ./ ./build/deploy.zip",
-    "deploy": "npm run clean-modules && npm run zip"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.343.0",
-    "aws-serverless-express": "^3.3.5",
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
     "express": "^4.16.3"
   },
   "devDependencies": {
-    "modclean": "^3.0.0-beta.1",
-    "modclean-patterns-default": "^1.1.2"
+    "nodemon": "^1.18.5"
   }
 }
