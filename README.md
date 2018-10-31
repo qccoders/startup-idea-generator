@@ -2,6 +2,16 @@
 
 Click a button, receive a randomized startup idea!  With enough clicks and a vivid imagination, you could be the CEO of the next billion dollar startup!
 
+## Usage
+
+```
+git clone https://github.com/qccoders/startup-idea-generator
+cd startup-idea-generator/web
+npm install ../api
+npm install
+npm start
+```
+
 ## About this App
 
 This app is being collaboratively built by the members of [QC Coders](http://qccoders.org) as part of the [Hacktoberfest 2018](https://hacktoberfest.digitalocean.com/) event.  Our goal is to make something fun while providing our members with experience collaborating on an Open Source project and using Git and GitHub.
