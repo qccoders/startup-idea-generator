@@ -1,8 +1,12 @@
 const express = require("express");
+const cors = require("cors");
+
 const startupList = require("./startups.js");
 const nounsList = require("./nouns.js");
 
 const app = express();
+app.use(cors());
+
 const port = 3001;
 
 const getRandomIndex = array => array[Math.floor(Math.random() * array.length)];
