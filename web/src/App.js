@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Header, Button } from "semantic-ui-react";
+import { Container, Header, Icon, Button } from "semantic-ui-react";
 import axios from 'axios';
 
 class App extends Component {
@@ -18,11 +18,23 @@ class App extends Component {
 
     render() {
         return (
-            <Container text>
-                <Header as="h1" content="Startup Idea Generator" textAlign="center" />
-                <span>{this.state.idea.startup}</span> for <span>{this.state.idea.noun}</span>
+            <Container text textAlign='center' style={{'margin-top': 50}}>
+                <Header as="h1" icon textAlign="center">
+                    <Icon name='idea' circular/>
+                    Startup Idea Generator
+                </Header>
+
+                <Container text>
+                    <span>{this.state.idea.startup}</span> for <span>{this.state.idea.noun}</span>
+                </Container>
                 
-                <Button onClick={this.get}>Roll for a new idea</Button>
+                <Button 
+                    primary 
+                    onClick={this.get}
+                    style={{'margin-top': 50}}
+                >
+                    Roll for a New Idea
+                </Button>
             </Container>
         );
     }
