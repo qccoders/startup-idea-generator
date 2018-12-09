@@ -20,7 +20,7 @@ const styles = {
 }
 
 class App extends Component {
-    state = { startup: '', startupWiki: [], showStartupWiki: false, noun: '' }
+    state = { startup: '', startupWiki: [], startupWikiPosition: 0, showStartupWiki: false, noun: '' }
 
     componentDidMount = () => {
         this.get();
@@ -33,7 +33,7 @@ class App extends Component {
                 this.setState({ startup: response.data.startup, noun: response.data.noun }, () => {
                     axios.get('https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.state.startup + '&format=json&origin=*')
                     .then(response => {
-                        this.setState({ startupWiki: response.data });
+                        this.setState({ startupWiki: response.data, startupWikiPosition: 0 });
                     });
                 });
             });
@@ -44,8 +44,25 @@ class App extends Component {
         this.setState({ showStartupWiki: !this.state.showStartupWiki });
     }
 
+    handleStartupWikiPage = (page) => {
+        let wiki = this.state.startupWiki;
+        let pos = this.state.startupWikiPosition;
+        let next = pos + page;
+
+        console.log(next);
+
+        if (next >= wiki[1].length) {
+            next = 0;
+        }        
+        else if (next < 0) {
+            next = wiki[1].length - 1;
+        }
+
+        this.setState({ startupWikiPosition: next });
+    }
+
     render() {
-        let { startup, startupWiki, showStartupWiki, noun} = this.state;
+        let { startup, startupWiki, showStartupWiki, startupWikiPosition, noun} = this.state;
 
         return (
             <Container text textAlign='center' style={{ marginTop: 50}}>
@@ -67,14 +84,29 @@ class App extends Component {
 
                 {showStartupWiki && <Container text textAlign='left'>
                     <Segment raised>
-                        {startupWiki && startupWiki[1] && 
-                            startupWiki[1].map((s, i) => 
-                                <Container key={i} style={{ marginBottom: 25 }}>
-                                    <Header as='h4'>{s}</Header>
-                                    <p>{startupWiki[2][i]}</p>
-                                </Container>
-                            )
-                        }
+                        <Container>
+                            <Header as='h4'>{startupWiki[1][startupWikiPosition]}</Header>
+                            <p>{startupWiki[2][startupWikiPosition]}</p>
+                            <Container textAlign='right'>
+                                <Button.Group>
+                                    <Button 
+                                        size='mini' 
+                                        compact 
+                                        icon
+                                    >
+                                        <Icon name='chevron left' onClick={() => this.handleStartupWikiPage(-1)}/>
+                                    </Button>
+                                    <Button size='mini' compact>{startupWikiPosition + 1}/{startupWiki[1].length}</Button>
+                                    <Button 
+                                        size='mini' 
+                                        compact 
+                                        icon
+                                    >
+                                        <Icon name='chevron right' onClick={() => this.handleStartupWikiPage(1)}/>
+                                    </Button>
+                                </Button.Group>
+                            </Container>
+                        </Container>
                     </Segment>
                 </Container>}
 
