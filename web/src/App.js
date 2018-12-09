@@ -1,9 +1,19 @@
 import React, { Component } from "react";
-import { Container, Header, Icon, Button } from "semantic-ui-react";
+import { Container, Header, Icon, Button, Segment } from "semantic-ui-react";
 import axios from 'axios';
 
+const styles = {
+    for: {
+        color: '#808080', 
+        'font-weight' : '100', 
+        'font-size': 24,
+        'margin-left': 5,
+        'margin-right': 5,
+    }
+}
+
 class App extends Component {
-    state = { idea: { startup: '', noun: '' } }
+    state = { startup: '', startupWiki: [], noun: '' }
 
     componentDidMount = () => {
         this.get();
@@ -12,22 +22,37 @@ class App extends Component {
     get = () => {
         axios.get('http://localhost:3001/api/idea')
         .then(response => {
-            this.setState({ idea: response.data });
+            this.setState({ startup: response.data.startup, noun: response.data.noun }, () => {
+                axios.get('https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.state.startup + '&format=json&limit=5&origin=*')
+                .then(response => {
+                    this.setState({ startupWiki: response.data });
+                });
+            });
         });
     }
 
     render() {
+        let { startup, startupWiki, noun} = this.state;
+
         return (
             <Container text textAlign='center' style={{'margin-top': 50}}>
-                <Header as="h1" icon textAlign="center">
+                <Header as="h3" icon textAlign="center">
                     <Icon name='idea' circular/>
                     Startup Idea Generator
                 </Header>
 
-                <Container text>
-                    <span>{this.state.idea.startup}</span> for <span>{this.state.idea.noun}</span>
+                <Header as='h1' style={{ 'margin-top': 50 }}>
+                    {startup} <span style={styles.for}>for</span> {noun}
+                </Header>
+
+                <Container text textAlign='left'>
+                    <Segment raised>
+                        <ul>
+                            {startupWiki && startupWiki[1] && startupWiki[1].map((s, i) => <li>{s}: {startupWiki[2][i]}</li>)}
+                        </ul>
+                    </Segment>
                 </Container>
-                
+
                 <Button 
                     primary 
                     onClick={this.get}
