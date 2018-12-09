@@ -20,6 +20,11 @@ const styles = {
     link: {
         marginLeft: 5,
     },
+    button: {
+        marginTop: 50,
+        marginRight: 0,
+        marginLeft: 0,
+    }
 }
 
 class App extends Component {
@@ -123,7 +128,7 @@ class App extends Component {
                 <Button 
                     primary 
                     onClick={this.get}
-                    style={{ marginTop: 50}}
+                    style={styles.button}
                 >
                     New Idea
                 </Button>
