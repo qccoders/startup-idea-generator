@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Header, Icon, Button, Segment } from "semantic-ui-react";
 import axios from 'axios';
+import { getIdeaPair } from './idea'
 
 const styles = {
     for: {
@@ -35,15 +36,12 @@ class App extends Component {
     }
 
     get = () => {
-        this.setState({ showStartupWiki: false }, () => {
-            axios.get('http://localhost:3001/api/idea')
+        let idea = getIdeaPair();
+
+        this.setState({ startup: idea.startup, noun: idea.noun, showStartupWiki: false }, () => {
+            axios.get('https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.state.startup + '&format=json&origin=*')
             .then(response => {
-                this.setState({ startup: response.data.startup, noun: response.data.noun }, () => {
-                    axios.get('https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.state.startup + '&format=json&origin=*')
-                    .then(response => {
-                        this.setState({ startupWiki: response.data, startupWikiPosition: 0 });
-                    });
-                });
+                this.setState({ startupWiki: response.data, startupWikiPosition: 0 });
             });
         });
     }
