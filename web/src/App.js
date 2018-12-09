@@ -16,7 +16,10 @@ const styles = {
         top: -25,
         color: 'orangered',
         position: 'relative',
-    }
+    },
+    link: {
+        marginLeft: 5,
+    },
 }
 
 class App extends Component {
@@ -64,6 +67,9 @@ class App extends Component {
     render() {
         let { startup, startupWiki, showStartupWiki, startupWikiPosition, noun} = this.state;
 
+        let wikiTitle = startupWiki && startupWiki[1] && startupWiki[1][startupWikiPosition];
+        let wikiText = startupWiki && startupWiki[2] && startupWiki[2][startupWikiPosition];
+
         return (
             <Container text textAlign='center' style={{ marginTop: 50}}>
                 <Header as="h3" icon textAlign="center">
@@ -85,9 +91,13 @@ class App extends Component {
                 {showStartupWiki && <Container text textAlign='left'>
                     <Segment raised>
                         <Container>
-                            <Header as='h4'>{startupWiki[1][startupWikiPosition]}</Header>
-                            <p>{startupWiki[2][startupWikiPosition]}</p>
-                            <Container textAlign='right'>
+                            <Header as='h4'>
+                                <a href={'https://en.wikipedia.org/wiki/' + wikiTitle}>
+                                    {wikiTitle}<Icon style={styles.link} name='external alternate'/>
+                                </a>
+                            </Header>
+                            <p>{wikiText}</p>
+                            {startupWiki[1].length > 1 && <Container textAlign='right'>
                                 <Button.Group>
                                     <Button 
                                         size='mini' 
@@ -105,7 +115,7 @@ class App extends Component {
                                         <Icon name='chevron right' onClick={() => this.handleStartupWikiPage(1)}/>
                                     </Button>
                                 </Button.Group>
-                            </Container>
+                            </Container>}
                         </Container>
                     </Segment>
                 </Container>}
@@ -115,7 +125,7 @@ class App extends Component {
                     onClick={this.get}
                     style={{ marginTop: 50}}
                 >
-                    Roll for a New Idea
+                    New Idea
                 </Button>
             </Container>
         );
