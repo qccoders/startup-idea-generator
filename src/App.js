@@ -28,8 +28,18 @@ const styles = {
     }
 }
 
+const initialState = {
+    startup: '', 
+    noun: '', 
+    wiki: {
+        entries: [],
+        position: 0,
+        show: false,
+    },    
+}
+
 class App extends Component {
-    state = { startup: '', startupWiki: [], startupWikiPosition: 0, showStartupWiki: false, noun: '' }
+    state = initialState;
 
     componentDidMount = () => {
         this.get();
@@ -37,41 +47,50 @@ class App extends Component {
 
     get = () => {
         let idea = getIdeaPair();
-
-        this.setState({ startup: idea.startup, noun: idea.noun, showStartupWiki: false }, () => {
-            axios.get('https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.state.startup + '&format=json&origin=*')
-            .then(response => {
-                this.setState({ startupWiki: response.data, startupWikiPosition: 0 });
-            });
+        this.setState({ 
+            startup: idea.startup, 
+            noun: idea.noun, 
+            wiki: initialState.wiki,
         });
     }
 
     handleInfoClick = () => {
-        this.setState({ showStartupWiki: !this.state.showStartupWiki });
+        if (this.state.wiki.show) {
+            this.setState({ wiki: initialState.wiki });
+        }
+        else {
+            axios.get('https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.state.startup + '&format=json&origin=*')
+            .then(response => {
+                this.setState({ 
+                    wiki: {
+                        entries: response.data,
+                        position: 0,
+                        show: true,
+                    },
+                });
+            });
+        }
     }
 
     handleStartupWikiPage = (page) => {
-        let wiki = this.state.startupWiki;
-        let pos = this.state.startupWikiPosition;
-        let next = pos + page;
+        let wiki = this.state.wiki;
+        let next = wiki.position + page;
 
-        console.log(next);
-
-        if (next >= wiki[1].length) {
+        if (next >= wiki.entries[1].length) {
             next = 0;
         }        
         else if (next < 0) {
-            next = wiki[1].length - 1;
+            next = wiki.entries[1].length - 1;
         }
 
-        this.setState({ startupWikiPosition: next });
+        this.setState({ wiki: { ...this.state.wiki, position: next }});
     }
 
     render() {
-        let { startup, startupWiki, showStartupWiki, startupWikiPosition, noun} = this.state;
+        let { startup, noun, wiki } = this.state;
 
-        let wikiTitle = startupWiki && startupWiki[1] && startupWiki[1][startupWikiPosition];
-        let wikiText = startupWiki && startupWiki[2] && startupWiki[2][startupWikiPosition];
+        let wikiTitle = wiki.entries && wiki.entries[1] && wiki.entries[1][wiki.position];
+        let wikiText = wiki.entries && wiki.entries[2] && wiki.entries[2][wiki.position];
 
         return (
             <Container text textAlign='center' style={{ marginTop: 50}}>
@@ -91,7 +110,7 @@ class App extends Component {
                     <span>{noun}</span> 
                 </Header>
 
-                {showStartupWiki && <Container text textAlign='left'>
+                {wiki.show && <Container text textAlign='left'>
                     <Segment raised>
                         <Container>
                             <Header as='h4'>
@@ -100,7 +119,7 @@ class App extends Component {
                                 </a>
                             </Header>
                             <p>{wikiText}</p>
-                            {startupWiki[1].length > 1 && <Container textAlign='right'>
+                            {wiki.entries[1].length > 1 && <Container textAlign='right'>
                                 <Button.Group>
                                     <Button 
                                         size='mini' 
@@ -109,7 +128,7 @@ class App extends Component {
                                     >
                                         <Icon name='chevron left' onClick={() => this.handleStartupWikiPage(-1)}/>
                                     </Button>
-                                    <Button size='mini' compact>{startupWikiPosition + 1}/{startupWiki[1].length}</Button>
+                                    <Button size='mini' compact>{wiki.position + 1}/{wiki.entries[1].length}</Button>
                                     <Button 
                                         size='mini' 
                                         compact 
