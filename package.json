@@ -8,12 +8,9 @@
     "react-dom": "^16.6.3",
     "react-scripts": "2.0.4",
     "semantic-ui-css": "^2.4.0",
-    "semantic-ui-react": "^0.82.5",
-    "startup-idea-generator-api": "file:../api"
+    "semantic-ui-react": "^0.82.5"
   },
-  "devDependencies": {
-    "nodemon": "^1.18.7"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
