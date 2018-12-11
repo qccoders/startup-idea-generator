@@ -9,8 +9,7 @@ Click a button, receive a randomized startup idea!  With enough clicks and a viv
 
 ```
 git clone https://github.com/qccoders/startup-idea-generator
-cd startup-idea-generator/web
-npm install ../api
+cd startup-idea-generator
 npm install
 npm start
 ```
