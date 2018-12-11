@@ -1,9 +1,7 @@
 language: node_js
-stage: Web
 node_js:
 - stable
 before_script:
-- cd web
 - npm install
 cache:
   directories:
