@@ -1,26 +1,26 @@
-- language: node_js
-  stage: Web
-  node_js:
-  - stable
-  before_script:
-  - cd web
-  - npm install
-  cache:
-    directories:
-    - node_modules
-  script:
-  - npm test
-  - npm run build
-  deploy:
-    provider: s3
-    access_key_id: AKIAJDYQOXFBUP2VAESA
-    secret_access_key:
-      secure: fjwZO1M4jJG2JYZfVVF9z8umlZkKy8Z3MtieapYYTnKEsRLJq013S5H38GZfyHTrawWpgXbS9OvoOyJ1xitKMVgOlt+LDOpATJOOQtyG5suap9vHLu1u/xaSB3BXA0kGLbqr735jXJgfaXsCrewnfLn4WEgNnLvF7fABn5n/7xNM6eGBbNIh58bEMf/aaFaFTPpmcgkn6pm7lKRAgZV2GGeT2qWKLWix+mYGuS4ds4SIfwqXLO9JCkTbny+3Uqy/guXTtStk9hWvV4aWEisZ901+07QaBxh+elFr8Y5auO2eGDqsKV0NxBOfEe+gVbssg0Y+lN0GZub/4U08Zj0x+LNIZXO7b1/yk2qQtS9n8w+sF0uLuwdstlxooPNXMo4m/MF6PPvc/lQe9GOnKTKE7dY3Aby51a6EqIYrneWWF1XuHYpvuKKlDqmeKZ/4sk1TpwyZT/Y0FEDv2hD0FZJnErNg2vRBDMMZ0J1n3Irmgt1U4eoFPNumbMRjSFaqTBNfy7VGqHi2HuI4jKu6w72watuMY6ssCkN9oduuqsQjpih+fHoMTrqaqWTEVf3LCISkZjNykxQPex/REjswnvpzckN+yZRMIZaTEs0ZLUNpw4srur/kXwNcbd0/mVMrEbuc09in3Okz/TUksCUPhS4MiJQ4duyNM4AqB3zZDlE1pfM=
-    bucket: qccoders-startup-idea-generator
-    skip_cleanup: true
-    local_dir: build
-    region: us-east-1
-    acl: public_read
-    on:
-      repo: qccoders/startup-idea-generator
-      branch: master
+language: node_js
+stage: Web
+node_js:
+- stable
+before_script:
+- cd web
+- npm install
+cache:
+  directories:
+  - node_modules
+script:
+- npm test
+- npm run build
+deploy:
+  provider: s3
+  access_key_id: AKIAJDYQOXFBUP2VAESA
+  secret_access_key:
+    secure: fjwZO1M4jJG2JYZfVVF9z8umlZkKy8Z3MtieapYYTnKEsRLJq013S5H38GZfyHTrawWpgXbS9OvoOyJ1xitKMVgOlt+LDOpATJOOQtyG5suap9vHLu1u/xaSB3BXA0kGLbqr735jXJgfaXsCrewnfLn4WEgNnLvF7fABn5n/7xNM6eGBbNIh58bEMf/aaFaFTPpmcgkn6pm7lKRAgZV2GGeT2qWKLWix+mYGuS4ds4SIfwqXLO9JCkTbny+3Uqy/guXTtStk9hWvV4aWEisZ901+07QaBxh+elFr8Y5auO2eGDqsKV0NxBOfEe+gVbssg0Y+lN0GZub/4U08Zj0x+LNIZXO7b1/yk2qQtS9n8w+sF0uLuwdstlxooPNXMo4m/MF6PPvc/lQe9GOnKTKE7dY3Aby51a6EqIYrneWWF1XuHYpvuKKlDqmeKZ/4sk1TpwyZT/Y0FEDv2hD0FZJnErNg2vRBDMMZ0J1n3Irmgt1U4eoFPNumbMRjSFaqTBNfy7VGqHi2HuI4jKu6w72watuMY6ssCkN9oduuqsQjpih+fHoMTrqaqWTEVf3LCISkZjNykxQPex/REjswnvpzckN+yZRMIZaTEs0ZLUNpw4srur/kXwNcbd0/mVMrEbuc09in3Okz/TUksCUPhS4MiJQ4duyNM4AqB3zZDlE1pfM=
+  bucket: qccoders-startup-idea-generator
+  skip_cleanup: true
+  local_dir: build
+  region: us-east-1
+  acl: public_read
+  on:
+    repo: qccoders/startup-idea-generator
+    branch: master
