@@ -1,5 +1,8 @@
 # Startup Idea Generator
 
+[![Build Status](https://travis-ci.org/qccoders/startup-idea-generator.svg?branch=master)](https://travis-ci.org/qccoders/startup-idea-generator)
+[![license](https://img.shields.io/github/license/qccoders/startup-idea-generator.svg)](https://github.com/qccoders/startup-idea-generator/blob/master/LICENSE)
+
 Click a button, receive a randomized startup idea!  With enough clicks and a vivid imagination, you could be the CEO of the next billion dollar startup!
 
 ## Usage
